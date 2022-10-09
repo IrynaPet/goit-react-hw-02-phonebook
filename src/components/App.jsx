@@ -25,15 +25,17 @@ class App extends Component {
       number,
     };
 
+     this.setState(({ contacts }) => ({
+      contacts: [contact, ...contacts],
+     }));
+    
+
 
     if (contacts.some(({ name }) => name === contact.name)) {
       alert(`Sorry, ${name} already exists`);
       return;
     }
-
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+ 
   };
 
   deleteContact = contactId => {
@@ -61,7 +63,7 @@ class App extends Component {
       <>
         <div className="phoneBook">
           <h1>Phonebooke</h1>
-          <ContactForm onAddContact={this.addContact} />
+          <ContactForm addContact={this.addContact} />
           <Filter value={filter} onChange={this.onFilter} />
            <ContactList
             contacts={visibleContacts}
