@@ -1,8 +1,5 @@
 import React, { Component }  from "react";
 
-import PropTypes from 'prop-types';
-
-
 class ContactForm extends Component {
     state = {
     name: '',
@@ -10,8 +7,7 @@ class ContactForm extends Component {
     };
 
 handelChange = event => {
-     const { name, value } = event.currentTarget;
-     
+    const { name, value } = event.currentTarget;
     this.setState({[name]: value})
    };
   
@@ -20,14 +16,10 @@ handelChange = event => {
         this.props.onSubmit({ ...this.state });
         this.setState({name: '', number: ''});
     };
-    
-    reset = () => { this.state({ contacts: [], name: '' }); };
-     
+         
     render() {
-    
-    return (
-     
-        <form onSubmit={this.handelSubmit} className="">
+        return (
+             <form onSubmit={this.handelSubmit} className="">
          <div className="">       
             <label htmlFor="">Name
             <input
@@ -61,8 +53,5 @@ handelChange = event => {
   }
 }
 
-ContactForm.propTypes = {
-  Name: PropTypes.string,
-  Contacts: PropTypes.number,
-}
+
 export default ContactForm;

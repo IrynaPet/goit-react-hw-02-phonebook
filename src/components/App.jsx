@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ContactForm from "./ContactForm/ContactForm";
 import Filter from './Filter';
 import ContactList from './ContactList';
-import shortid from 'shortid';
+import { nanoid } from 'nanoid';
 
 class App extends Component {
  state = {
@@ -20,10 +20,11 @@ class App extends Component {
     const { contacts } = this.state;
     const { name, number } = data;
     const contact = {
-      id: shortid.generate(),
+      id: nanoid(),
       name,
       number,
     };
+
 
     if (contacts.some(({ name }) => name === contact.name)) {
       alert(`Sorry, ${name} already exists`);
@@ -44,8 +45,9 @@ class App extends Component {
     return visibleContacts;
   };
 
-  onFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
+  onFilter = event => {
+    event.preventDefault();
+    this.setState({ filter: event.currentTarget.value });
   };
 
 
@@ -60,7 +62,7 @@ class App extends Component {
         <div className="phoneBook">
           <h1>Phonebooke</h1>
           <ContactForm onAddContact={this.addContact} />
-          <Filter value={filter} onChange={this.addContact} />
+          <Filter value={filter} onChange={this.onFilter} />
            <ContactList
             contacts={visibleContacts}
             deleteContact={this.deleteContact}
